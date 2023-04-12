@@ -37,7 +37,7 @@ public class AppExceptionHandler extends AbstractErrorWebExceptionHandler {
 
     private Mono<ServerResponse> renderException(ServerRequest request) {
         Map<String, Object> error = this.getErrorAttributes(request, ErrorAttributeOptions.defaults());
-        error.remove("status");
+        // error.remove("status");
         error.remove("requestId");
         return ServerResponse.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(error));

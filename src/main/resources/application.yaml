@@ -52,3 +52,5 @@ spring:
       defaultZone: http://localhost:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
+jwt:
+  secret: 4c91c9aaaceb49c27e876aae901a5b0c955e0c698349fd10d86cc9234a32e91
