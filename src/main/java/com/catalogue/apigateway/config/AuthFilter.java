@@ -40,27 +40,12 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
             log.info("Authorization header exists!");
             String token = getAuthHeader(request);
 
-            // if (token.startsWith("Basic") && !target.endsWith("auht/login"))
-            // return chain.filter(exchange);
-
             if (!token.startsWith("Bearer") || jwtUtil.isInvalid(token.substring(7)))
                 return onError(exchange, "Authorization header is ivalid, please login",
                         HttpStatus.UNAUTHORIZED);
 
-            token = token.substring(7);
-
-            populateRequestWithHeaders(exchange, token);
-
             return chain.filter(exchange);
         };
-    }
-
-    private void populateRequestWithHeaders(ServerWebExchange exchange, String token) {
-        Claims claims = jwtUtil.getAllClaimsFromToken(token);
-        exchange.getRequest().mutate()
-                .header("id", String.valueOf(claims.get("id")))
-                .header("role", String.valueOf(claims.get("role")))
-                .build();
     }
 
     private String getAuthHeader(ServerHttpRequest request) {
