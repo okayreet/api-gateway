@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
     @ExceptionHandler(AppException.class)
-    public ResponseEntity<?> handleBookAPIException(AppException bappException){
+    public ResponseEntity<?> handleAPIException(AppException appException){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error message", bappException.getMessage());
+        errorMap.put("error message", appException.getMessage());
         errorMap.put("status", HttpStatus.BAD_REQUEST.toString());
         return ResponseEntity.ok(errorMap);
     }

@@ -11,7 +11,6 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.catalogue.apigateway.exception.AppException;
 
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
