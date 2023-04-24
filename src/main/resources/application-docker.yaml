@@ -1,5 +1,7 @@
 server:
   port: 8080
+  error:
+    include-message: always
 
 spring:
   application:
@@ -12,26 +14,28 @@ spring:
           lower-case-service-id: true
       routes:
         - id: user
-          uri: lb://user
+          uri: http://localhost:8081
           predicates:
             - Path=/api/v1/user/**
           filters:
-            - AuthenticationFilter
+            - AuthFilter
 
         - id: product
-          uri: lb://product
+          uri: http://localhost:8082
           predicates:
             - Path=/api/v1/product/**
+          filters:
+            - AuthFilter
 
         - id: order
-          uri: lb://order
+          uri: http://localhost:8083
           predicates:
             - Path=/api/v1/order/**
           filters:
-            - AuthenticationFilter
+            - AuthFilter
 
         - id: authentication
-          uri: lb://authentication
+          uri: http://localhost:8084
           predicates:
             - Path=/api/v1/auth/**
 eureka:
@@ -40,3 +44,5 @@ eureka:
       defaultZone: http://eureka-server:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
+jwt:
+  secret: 4c91c9aaaceb49c27e876aae901a5b0c955e0c698349fd10d86cc9234a32e91
